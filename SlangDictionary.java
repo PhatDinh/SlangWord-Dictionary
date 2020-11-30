@@ -68,4 +68,45 @@ public class SlangDictionary
         }
         System.out.println(answer);
     }
+    //static void CreateSlangWord()
+    //{
+      //  Scanner word= new Scanner(System.in);
+       // System.out.println("What is your new Slang Word: ");
+      //  String check=word.nextLine();
+      //  System.out.println("What is the definition: ");
+      //  String check1=word.nextLine();
+     //   if (m.containsKey(check))
+     ///   {
+      //      System.out.println("Do u want to overwrite: ");
+
+      //  }
+    //}
+    static void RemoveSlangSword()
+    {
+        Scanner word= new Scanner(System.in);
+        System.out.println("What slangword u want to remove: ");
+        String check=word.nextLine();
+        if (m.containsKey(check))
+        {
+            System.out.println("Are u sure u want to remove it: ");
+            Boolean confirm=word.nextBoolean();
+            if (confirm==true) m.remove(check, m.get(check));
+        }
+    }
+    static void EditSlangWord(){
+        Scanner word= new Scanner(System.in);
+        System.out.println("What slangword u want to edit: ");
+        String check=word.nextLine();
+        if (m.containsKey(check))
+        {
+            System.out.println("What is the definition u want to change: ");
+            String temp=word.nextLine();
+            List<String> change=new ArrayList();
+            change.add(temp);
+            m.replace(check,change);
+        }
+        else System.out.println("This slangword dont't exist");
+    }
+    static void RandomSlangWord(){}
+    static void ShowHistorySlangWord{}
 }
