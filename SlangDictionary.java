@@ -13,6 +13,8 @@ import java.util.ArrayList;
 public class SlangDictionary
 {
     public static HashMap<String,List<String>> m=new HashMap<String,List<String>>();
+    public List<String> historySlangWord=new ArrayList();
+    public static Scanner word= new Scanner(System.in);
     static void GetData(){
      try
      {
@@ -46,7 +48,6 @@ public class SlangDictionary
     }
     static void FindSlangWord()
     {
-        Scanner word= new Scanner(System.in);
         System.out.println("What word u want to find: ");
         String check=word.nextLine();
         List<String> test=m.get(check);
@@ -93,6 +94,8 @@ public class SlangDictionary
             if (confirm==true) m.remove(check, m.get(check));
         }
     }
+
+    //5.Edit SlangWord
     static void EditSlangWord(){
         Scanner word= new Scanner(System.in);
         System.out.println("What slangword u want to edit: ");
@@ -107,6 +110,37 @@ public class SlangDictionary
         }
         else System.out.println("This slangword dont't exist");
     }
+
     static void RandomSlangWord(){}
-    static void ShowHistorySlangWord{}
+
+    //7.Reset List
+    static void ResetSlangDictionary()
+    {
+        try
+     {
+        File f=new File("default.txt");
+        FileReader fr=new FileReader(f);
+        BufferedReader br=new BufferedReader(fr);
+        String line;
+        while((line=br.readLine())!=null)
+        {
+            if (line.contains("`"))
+            {
+                String[] s=line.split("`");
+                String[] tmp=s[1].split("\\|");
+                List<String> temp=Arrays.asList(tmp);
+                m.put(s[0],temp);
+            }
+        }
+        fr.close();
+        br.close();
+    }
+    catch (Exception ex)
+    {
+        System.out.println("ERROR"+ex);
+    }
+    }
+
+    //3.History Searching
+    static void ShowHistorySlangWord(){}
 }
