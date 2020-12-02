@@ -90,29 +90,39 @@ public class SlangDictionary
     //}
     static void RemoveSlangWord()
     {
+        clearScreen();
         System.out.println("What slangword u want to remove: ");
         String check=word.nextLine();
         if (m.containsKey(check))
         {
-            System.out.println("Are u sure u want to remove it: ");
-            Boolean confirm=word.nextBoolean();
-            if (confirm==true) m.remove(check, m.get(check));
+            System.out.println("Are u sure u want to remove it: (Y/N) ");
+            String confirm=word.nextLine();
+            if (confirm=="Y" || confirm=="y") m.remove(check);
         }
+        Menu();
     }
 
     //5.Edit SlangWord
     static void EditSlangWord(){
-        System.out.println("What slangword u want to edit: ");
+        clearScreen();
+        System.out.print("What slangword u want to edit: ");
         String check=word.nextLine();
-        if (m.containsKey(check))
+        if (!m.containsKey(check)) System.out.println("This slangword dont't exist");
+        System.out.println("What do u want: ");
+        System.out.println("1. Replace Definition ");
+        System.out.println("2. Edit Definition ");
+        System.out.println("YOUR CHOICE:");
+        int choice=word.nextInt();
+        String pass=word.nextLine();
+        if (choice==1) 
         {
-            System.out.println("What is the definition u want to change: ");
+            System.out.print("What is the new definition : ");
             String temp=word.nextLine();
             List<String> change=new ArrayList();
             change.add(temp);
             m.replace(check,change);
         }
-        else System.out.println("This slangword dont't exist");
+        Menu();
     }
 
     static void RandomSlangWord(){}
