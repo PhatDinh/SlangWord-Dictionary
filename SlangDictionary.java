@@ -17,6 +17,11 @@ public class SlangDictionary
         System.out.flush(); 
     } 
 
+    public static void pauseScreen(){
+        System.out.println("Press Any Key To Continue...");
+        new java.util.Scanner(System.in).nextLine();
+    }
+
     public static HashMap<String,List<String>> m=new HashMap<String,List<String>>();
     public static List<String> historySlangWord=new ArrayList();
     public static Scanner word= new Scanner(System.in);
@@ -83,7 +88,7 @@ public class SlangDictionary
 
       //  }
     //}
-    static void RemoveSlangSword()
+    static void RemoveSlangWord()
     {
         System.out.println("What slangword u want to remove: ");
         String check=word.nextLine();
@@ -141,7 +146,16 @@ public class SlangDictionary
     }
 
     //3.History Searching
-    static void ShowHistorySlangWord(){}
+    static void ShowHistorySlangWord()
+    {
+        clearScreen();
+        System.out.println("Your history search is: ");
+        for (String temp: historySlangWord)
+        {
+            System.out.println(temp);
+        }
+        pauseScreen();
+    }
 
     //Edit File
     static void updateFile(){}
@@ -168,6 +182,11 @@ public class SlangDictionary
         if (choice==1) FindSlangWord();
         else if (choice==2) FindDefinition();
         else if (choice==3) ShowHistorySlangWord();
+        else if (choice==5) EditSlangWord();
+        else if (choice==6) RemoveSlangWord();
+        else if (choice==7) ResetSlangDictionary();
+        else if (choice==8) RandomSlangWord();
+        else System.exit(0);
     }
 
     public static void main(String[] args)
