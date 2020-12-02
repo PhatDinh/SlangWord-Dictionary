@@ -49,7 +49,7 @@ public class SlangDictionary
     public static void FindSlangWord()
     {
         clearScreen();
-        System.out.println("What word u want to find: ");
+        System.out.print("What word u want to find: ");
         String check=word.nextLine();
         List<String> test=m.get(check);
         System.out.println(test);
