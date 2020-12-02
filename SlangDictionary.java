@@ -130,17 +130,25 @@ public class SlangDictionary
         System.out.println("What is the definition: ");
         String check1=word.nextLine();
         List<String> t=new ArrayList();
+        t.add(check1);
         if (m.containsKey(check))
         {
-         System.out.println("Do u want to overwrite: ");
+            System.out.println("Do u want to overwrite: (Y/N) ");
+            String confirm=word.nextLine();
+            if (confirm.equals("Y") || confirm.equals("y") ) m.put(check,t);
+            else
+            {
+                List<String> i=new ArrayList();
+                i=m.get(check);
+                i.add(check1);
+                m.put(check,i);
+            }
         }
         else
         {
-            t.add(check1);
             m.put(check,t);
             System.out.println("Add New Slang Word Successfully");
         }
-        pauseScreen();
         Menu();
     }
 
@@ -150,27 +158,57 @@ public class SlangDictionary
         clearScreen();
         System.out.print("What slangword u want to edit: ");
         String check=word.nextLine();
-        if (!m.containsKey(check)) System.out.println("This slangword dont't exist");
+        if (!m.containsKey(check)) 
+        {
+            System.out.println("This slangword dont't exist");
+            pauseScreen();
+            Menu();
+        }
+        System.out.println("Here is the definition: " );
+
+        List<String> showCase=m.get(check);
+        int count=1;
+        for (String i: showCase)
+        {
+            System.out.println(count+ "." + i);
+            count++;
+        }
+        System.out.println("What word u want to change: ");
+        int index=word.nextInt();
+        clearScreen();
+
         System.out.println("What do u want: ");
         System.out.println("1. Replace Definition ");
-        System.out.println("2. Edit Definition ");
+        System.out.println("2. Delete Definition ");
+        System.out.println("3. Add Definition ");
         System.out.println("YOUR CHOICE:");
         int choice=word.nextInt();
         String pass=word.nextLine();
         if (choice==1) 
         {
+            showCase.remove(index-1);
             System.out.print("What is the new definition : ");
             String temp=word.nextLine();
-            List<String> change=new ArrayList();
-            change.add(temp);
-            m.replace(check,change);
+            showCase.add(temp);
+            m.replace(check,showCase);
         }
-        else
+        else if (choice==2)
         {
-            System.out.print("Here is the definition: " );
-            System.out.println(m.get(check));
-            System.out.print("What word u want to change: ");
-            pauseScreen();
+            if (showCase.size()==1) 
+            {
+                System.out.println("You can't delete this ");
+                pauseScreen();
+                Menu();
+            }
+            showCase.remove(index-1);
+            m.replace(check,showCase);
+        }
+        else if (choice==3)
+        {
+            System.out.print("What is the new definition : ");
+            String temp=word.nextLine();
+            showCase.add(temp);
+            m.replace(check,showCase);
         }
         Menu();
     }
@@ -185,7 +223,7 @@ public class SlangDictionary
         {
             System.out.println("Are u sure u want to remove it: (Y/N) ");
             String confirm=word.nextLine();
-            if (confirm.equals("Y") )m.remove(check);
+            if (confirm.equals("Y") || confirm.equals("y") ) m.remove(check);
         }
         Menu();
     }
@@ -224,29 +262,95 @@ public class SlangDictionary
     }
 
     //8.Random Slang Word
-    public static void RandomSlangWord(){
+    public static String RandomSlangWord(){
         clearScreen();
         int count=0;
         Random rd=new Random();
         int magicNumber=rd.nextInt(m.size());
+        String ans="";
         for (String i: m.keySet())
         {
             if (count==magicNumber)
-            {
-                System.out.print("Your Random Slang Word Is : ");
-                System.out.println(i);
-                System.out.print("And The Definition Is:   ");
-                List<String> t=m.get(i);
-                System.out.println(t);
+            {   
+                ans=i;
                 break;
             }else count++;
         }
+        return ans;
+    }
+
+    //9.Minigame 
+    public static void GuessGame1()
+    {
+        clearScreen();
+        Random rand = new Random(); 
+        List<String> poll=new ArrayList();
+
+        //A
+        String word=RandomSlangWord();
+        String qword=word;
+        List<String> w=m.get(word);
+        String win=w.get(rand.nextInt(w.size()));
+        poll.add(win);
+        //B
+        String word1=RandomSlangWord();
+        List<String> w1=m.get(word1);
+        word1=w1.get(rand.nextInt(w1.size()));
+        poll.add(word1);
+        //C
+        String word2=RandomSlangWord();
+        List<String> w2=m.get(word2);
+        word2=w2.get(rand.nextInt(w2.size()));
+        poll.add(word2);
+        //D
+        String word3=RandomSlangWord();
+        List<String> w3=m.get(word3);
+        word3=w3.get(rand.nextInt(w3.size()));
+        poll.add(word3);
+        System.out.println("Question: What is the Definition for " + qword);
         pauseScreen();
         Menu();
     }
 
-    //9.Minigame 
-    public static void GuessGame(){}
+    //10.Minigame
+    public static void GuessGame2()
+    {
+        clearScreen();
+        Random rand = new Random(); 
+        List<String> poll=new ArrayList();
+        String word1=RandomSlangWord();
+        poll.add(word1);
+        String word2=RandomSlangWord();
+        poll.add(word2);
+        String word3=RandomSlangWord();
+        poll.add(word3);
+        String word4=RandomSlangWord();
+        poll.add(word4);
+        List<String> qword=m.get(word1);
+        String win=word1;
+        System.out.println("Question: What is the Slang Word for " + qword.get(rand.nextInt(qword.size())));
+        word1=poll.get(rand.nextInt(poll.size()));
+        poll.remove(word1);
+        System.out.println("A.  " + word1);
+        word2=poll.get(rand.nextInt(poll.size()));
+        poll.remove(word2);
+        System.out.println("B.  " + word2);
+        word3=poll.get(rand.nextInt(poll.size()));
+        poll.remove(word3);
+        System.out.println("C.  " + word3);
+        word4=poll.get(rand.nextInt(poll.size()));
+        poll.remove(word4);
+        System.out.println("D.  " + word4);
+        System.out.println("Your Answer is: ");
+        String choice=word.nextLine();
+        if ( (choice.equals("A") || choice.equals("a")) && word1==win) System.out.println("Congratulations , Your Answer is correct"); 
+        else if ((choice.equals("B") || choice.equals("b")) && word2==win) System.out.println("Congratulations , Your Answer is correct");
+        else if ((choice.equals("C") || choice.equals("c")) && word3==win) System.out.println("Congratulations , Your Answer is correct");
+        else if ((choice.equals("D") || choice.equals("d")) && word4==win) System.out.println("Congratulations , Your Answer is correct");
+        else System.out.println("Sorry , Your Answer is incorrect . The Answer is " + win);
+        pauseScreen();
+        Menu();
+    }
 
     //Update History
     public static void updateHistory(){
@@ -295,7 +399,6 @@ public class SlangDictionary
     //Menu
     public static void Menu(){
         clearScreen();
-        System.out.println("Choose what u want: ");
         System.out.println("1. Search by SlangWord ");
         System.out.println("2. Search by Definition ");
         System.out.println("3. Show history ");
@@ -308,7 +411,7 @@ public class SlangDictionary
         System.out.println("10. Minigame find Slangword ");
         System.out.println("11. Clear History");
         System.out.println("12. Exit ");
-        System.out.print("YOUR CHOICE:  ");
+        System.out.println("YOUR CHOICE:  ");
         int choice=word.nextInt();
         String pass=word.nextLine();
         if (choice==1) FindSlangWord();
@@ -318,7 +421,19 @@ public class SlangDictionary
         else if (choice==5) EditSlangWord();
         else if (choice==6) RemoveSlangWord();
         else if (choice==7) ResetSlangDictionary();
-        else if (choice==8) RandomSlangWord();
+        else if (choice==8) 
+        {
+            String luckyword=RandomSlangWord();
+            System.out.print("Your Random Slang Word Is : ");
+            System.out.println(luckyword);
+            System.out.print("And The Definition Is:   ");
+            List<String> t=m.get(luckyword);
+            System.out.println(t);
+            pauseScreen();
+            Menu();
+        }
+        else if (choice==9) GuessGame1();
+        else if (choice==10) GuessGame2();
         else if (choice==11) 
         {
             clearScreen();
@@ -329,6 +444,7 @@ public class SlangDictionary
         }
         else 
         {
+            clearScreen();
             updateFile();
             updateHistory();
             System.exit(0);
