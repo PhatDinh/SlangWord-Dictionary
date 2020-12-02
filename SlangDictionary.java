@@ -12,10 +12,16 @@ import java.util.ArrayList;
 
 public class SlangDictionary
 {
+    public final static void clearScreen() {  
+        System.out.print("\033[H\033[2J");  
+        System.out.flush(); 
+    } 
+
     public static HashMap<String,List<String>> m=new HashMap<String,List<String>>();
-    public List<String> historySlangWord=new ArrayList();
+    public static List<String> historySlangWord=new ArrayList();
     public static Scanner word= new Scanner(System.in);
-    static void GetData(){
+    
+    public static void GetData(){
      try
      {
         File f=new File("slang.txt");
@@ -40,22 +46,16 @@ public class SlangDictionary
         System.out.println("ERROR"+ex);
     }
     }
-    public static void main(String[] args)
+    public static void FindSlangWord()
     {
-        GetData();
-        FindSlangWord();
-        FindDefinition();
-    }
-    static void FindSlangWord()
-    {
+        clearScreen();
         System.out.println("What word u want to find: ");
         String check=word.nextLine();
         List<String> test=m.get(check);
         System.out.println(test);
     }
-    static void FindDefinition()
+    public static void FindDefinition()
     {
-        Scanner word= new Scanner(System.in);
         System.out.println("What definition u want to find: ");
         String check=word.nextLine();
         List<String> answer=new ArrayList();
@@ -84,7 +84,6 @@ public class SlangDictionary
     //}
     static void RemoveSlangSword()
     {
-        Scanner word= new Scanner(System.in);
         System.out.println("What slangword u want to remove: ");
         String check=word.nextLine();
         if (m.containsKey(check))
@@ -97,7 +96,6 @@ public class SlangDictionary
 
     //5.Edit SlangWord
     static void EditSlangWord(){
-        Scanner word= new Scanner(System.in);
         System.out.println("What slangword u want to edit: ");
         String check=word.nextLine();
         if (m.containsKey(check))
@@ -143,4 +141,37 @@ public class SlangDictionary
 
     //3.History Searching
     static void ShowHistorySlangWord(){}
+
+    //Edit File
+    static void updateFile(){}
+
+
+    //Menu
+    public static void Menu(){
+        clearScreen();
+        System.out.println("Choose what u want: ");
+        System.out.println("1. Search by SlangWord ");
+        System.out.println("2. Search by Definition ");
+        System.out.println("3. Show history ");
+        System.out.println("4. Add Slangword ");
+        System.out.println("5. Edit Slangword ");
+        System.out.println("6. Delete Slangword ");
+        System.out.println("7. Reset to default ");
+        System.out.println("8. Random Slangword ");
+        System.out.println("9. Minigame find Definition ");
+        System.out.println("10. Minigame find Slangword ");
+        System.out.println("11. Exit ");
+        System.out.print("YOUR CHOICE:  ");
+        int choice=word.nextInt();
+        String pass=word.nextLine();
+        if (choice==1) FindSlangWord();
+        else if (choice==2) FindDefinition();
+        else if (choice==3) ShowHistorySlangWord();
+    }
+
+    public static void main(String[] args)
+    {
+        GetData();
+        Menu();
+    }
 }
