@@ -280,40 +280,64 @@ public class SlangDictionary
     }
 
     //9.Minigame 
-    public static void GuessGame1()
+    public static void GuessGameA()
     {
         clearScreen();
         Random rand = new Random(); 
         List<String> poll=new ArrayList();
-
-        //A
-        String word=RandomSlangWord();
-        String qword=word;
-        List<String> w=m.get(word);
-        String win=w.get(rand.nextInt(w.size()));
-        poll.add(win);
-        //B
+        
         String word1=RandomSlangWord();
+        String qword=word1;
         List<String> w1=m.get(word1);
         word1=w1.get(rand.nextInt(w1.size()));
+        String win=word1;
         poll.add(word1);
-        //C
+        
         String word2=RandomSlangWord();
         List<String> w2=m.get(word2);
         word2=w2.get(rand.nextInt(w2.size()));
         poll.add(word2);
-        //D
+       
         String word3=RandomSlangWord();
         List<String> w3=m.get(word3);
         word3=w3.get(rand.nextInt(w3.size()));
         poll.add(word3);
+        
+        String word4=RandomSlangWord();
+        List<String> w4=m.get(word4);
+        word4=w4.get(rand.nextInt(w4.size()));
+        poll.add(word4);
+
+
         System.out.println("Question: What is the Definition for " + qword);
+
+        word1=poll.get(rand.nextInt(poll.size()));
+        poll.remove(word1);
+        System.out.println("A.  " + word1);
+        word2=poll.get(rand.nextInt(poll.size()));
+        poll.remove(word2);
+        System.out.println("B.  " + word2);
+        word3=poll.get(rand.nextInt(poll.size()));
+        poll.remove(word3);
+        System.out.println("C.  " + word3);
+        word4=poll.get(rand.nextInt(poll.size()));
+        poll.remove(word4);
+        System.out.println("D.  " + word4);
+
+        System.out.println("Your Answer is: ");
+        String choice=word.nextLine();
+
+        if ( (choice.equals("A") || choice.equals("a")) && word1==win) System.out.println("Congratulations , Your Answer is correct"); 
+        else if ((choice.equals("B") || choice.equals("b")) && word2==win) System.out.println("Congratulations , Your Answer is correct");
+        else if ((choice.equals("C") || choice.equals("c")) && word3==win) System.out.println("Congratulations , Your Answer is correct");
+        else if ((choice.equals("D") || choice.equals("d")) && word4==win) System.out.println("Congratulations , Your Answer is correct");
+        else System.out.println("Sorry , Your Answer is incorrect . The Answer is " + win);
         pauseScreen();
         Menu();
     }
 
     //10.Minigame
-    public static void GuessGame2()
+    public static void GuessGameB()
     {
         clearScreen();
         Random rand = new Random(); 
@@ -432,8 +456,8 @@ public class SlangDictionary
             pauseScreen();
             Menu();
         }
-        else if (choice==9) GuessGame1();
-        else if (choice==10) GuessGame2();
+        else if (choice==9) GuessGameA();
+        else if (choice==10) GuessGameB();
         else if (choice==11) 
         {
             clearScreen();
