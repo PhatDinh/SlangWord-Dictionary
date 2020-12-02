@@ -56,6 +56,7 @@ public class SlangDictionary
     }
     public static void FindDefinition()
     {
+        clearScreen();
         System.out.println("What definition u want to find: ");
         String check=word.nextLine();
         List<String> answer=new ArrayList();
