@@ -31,7 +31,7 @@ public class SlangDictionary
     {
         try
      {
-        File f=new File("history.txt");
+        File f=new File("./data/history.txt");
         FileReader fr=new FileReader(f);
         BufferedReader br=new BufferedReader(fr);
         String line;
@@ -51,7 +51,7 @@ public class SlangDictionary
     public static void GetData(){
      try
      {
-        File f=new File("slang.txt");
+        File f=new File("./data/slang.txt");
         FileReader fr=new FileReader(f);
         BufferedReader br=new BufferedReader(fr);
         String line;
@@ -138,10 +138,8 @@ public class SlangDictionary
             if (confirm.equals("Y") || confirm.equals("y") ) m.put(check,t);
             else
             {
-                List<String> i=new ArrayList();
-                i=m.get(check);
+                List<String> i=m.get(check);
                 i.add(check1);
-                m.put(check,i);
             }
         }
         else
@@ -379,7 +377,7 @@ public class SlangDictionary
     //Update History
     public static void updateHistory(){
         try {
-            File f = new File("history.txt");
+            File f = new File("./data/history.txt");
             FileWriter fw = new FileWriter(f);
             BufferedWriter bw = new BufferedWriter(fw);
             for (String temp : historySlangWord) {
@@ -397,7 +395,7 @@ public class SlangDictionary
     public static void updateFile()
     {
         try {
-            File f = new File("slang.txt");
+            File f = new File("./data/slang.txt");
             FileWriter fw = new FileWriter(f);
             BufferedWriter bw = new BufferedWriter(fw);
             for (String i: m.keySet())
