@@ -128,6 +128,7 @@ public class SlangDictionary
         clearScreen();
         System.out.println("What is your new Slang Word: ");
         String check=word.nextLine();
+        check=check.toUpperCase();
         System.out.println("What is the definition: ");
         String check1=word.nextLine();
         List<String> t=new ArrayList();
@@ -161,6 +162,7 @@ public class SlangDictionary
         clearScreen();
         System.out.print("What slangword u want to edit: ");
         String check=word.nextLine();
+        check=check.toUpperCase();
         if (!m.containsKey(check))
         {
             System.out.println("This slangword dont't exist");

@@ -638,7 +638,7 @@ TFP`Thanks For Playing
 TFS`Thanks For Sharing
 GAMS`Female legs
 D&D`Dungeons and Dragons
-TFT`TeamFight Tactics|The Frozen Throne| Thin Film Transistor
+TFT`The Frozen Throne| Thin Film Transistor
 GROK`Fully understand
 GROM`Grommet| young surfer
 D&M`Deep and Meaningful
